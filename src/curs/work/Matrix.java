@@ -48,9 +48,8 @@ public class Matrix {
                 } catch (InputMismatchException e) {
                     System.out.print("Сталася помилка при спробі вводу");
                 }
-                //System.out.print(matrix[i][j] + " ");
+
             }
-            //System.out.println();
         }
         System.out.print("Ваша матриця " + name + ":\n");
         for (int i = 0; i < matrix.length; i++) {
@@ -79,6 +78,22 @@ public class Matrix {
             for (int j = 0; j < this.matrix[i].length; j++) {
                 matrix[i][j] = matrix[i][j] / number;
                 System.out.print(this.matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    void transpose() {
+        System.out.printf("Результат транспонування матриці %s\n", name);
+        double[][] transposed = new double[this.columns][this.rows];
+        for (int i = 0; i < this.columns; i++) {
+            for (int j = 0; j < this.rows; j++) {
+                transposed[i][j] = this.matrix[j][i];
+            }
+        }
+        for (int i = 0; i < this.columns; i++) {
+            for (int j = 0; j < this.rows; j++) {
+                System.out.print(transposed[i][j] + " ");
             }
             System.out.println();
         }
@@ -135,7 +150,6 @@ public class Matrix {
     }
 
 
-
     Matrix addMatrices(Matrix firstMatrix, Matrix secondMatrix) {
         Matrix result = new Matrix();
         result.matrix = new double[firstMatrix.rows][secondMatrix.columns];
@@ -166,12 +180,12 @@ public class Matrix {
             Matrix result = multiplyMatrices(this, this);
             System.out.printf("Обернена матриця до матриці %s \n", this.name);
 
-                for (int i = 0; i < result.matrix.length; i++) {
-                    for (int j = 0; j < result.matrix[i].length; j++) {
-                        System.out.print(result.matrix[i][j] + " ");
-                    }
-                    System.out.println();
+            for (int i = 0; i < result.matrix.length; i++) {
+                for (int j = 0; j < result.matrix[i].length; j++) {
+                    System.out.print(result.matrix[i][j] + " ");
                 }
+                System.out.println();
+            }
 
         } else
             System.out.printf("Для пошуку оберненої матриці матриця %s має бути квадратною\n", this.name);
