@@ -1,8 +1,5 @@
 package curs.work;
 
-import org.w3c.dom.ls.LSOutput;
-
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 //Матричні перетворення: складання, перемноження, ділення, піднесення до степеня, пошук зворотної матриці та ін.
@@ -18,7 +15,7 @@ public class Matrix_app {
 
         while (command != 0) {
             System.out.print("1 - ввести матрицю, 2 - множення матриці на число, 3 - піднесення матриці до степеня," +
-                    " 4 - складання двох матриць, 5 - множення матриць, 6 - ділення матриці на число, 7 - пошук зворотньої матриці, 0 - вихід:   ");
+                    " 4 - складання двох матриць, 5 - множення матриць, 6 - ділення матриці на число, 7 - пошук оберненої матриці, 8 - транспонування матриці, 0 - вихід:   ");
             command = in.nextInt();
             switch (command) {
                 case (1): {
@@ -32,10 +29,8 @@ public class Matrix_app {
                     }
                 }
                 case (2): {
-                    int name;
+                    int name = matrixA.chooseMatrix();
                     double n;
-                    System.out.println("1 - обрати матрицю A, 2 - обрати матрицю В");
-                    name = in.nextInt();
                     System.out.println("Введіть множник:");
                     n = in.nextDouble();
                     switch (name) {
@@ -48,25 +43,80 @@ public class Matrix_app {
                             break;
                         }
                     }
+                    break;
+                }
+
+                case (3): {
+                    int name = matrixA.chooseMatrix();
+                    int k;
+                    System.out.println("Введіть показник степеня (ціле додатнє число)");
+                    k = in.nextInt();
+                    switch (name) {
+                        case (1): {
+                            matrixA.exponentMatrix(k);
+                            break;
+                        }
+                        case (2): {
+                            matrixB.exponentMatrix(k);
+                            break;
+                        }
+                    }
+                    break;
+                }
+                case (4): {
+                    matrixA.addMatrices(matrixB);
+                    break;
+                }
+
+                case (5): {
+                    int choice;
+                    System.out.println("1 - А*В, 2 - В*А");
+                    choice = in.nextInt();
+                    switch (choice) {
+                        case (1): {
+                            matrixA.multiplyMatrix(matrixB);
+                            break;
+                        }
+                        case (2): {
+                            matrixB.multiplyMatrix(matrixA);
+                            break;
+                        }
+                    }
+                    break;
                 }
 
                 case (6): {
-                    int name;
+                    int name = matrixA.chooseMatrix();
                     double n;
-                    System.out.println("1 - обрати матрицю A, 2 - обрати матрицю В");
-                    name = in.nextInt();
                     System.out.println("Введіть дільник:");
                     n = in.nextDouble();
                     switch (name) {
                         case (1): {
-                            matrixA.devideOnNUmber(n);
+                            matrixA.divideOnNUmber(n);
                             break;
                         }
                         case (2): {
-                            matrixB.devideOnNUmber(n);
+                            matrixB.divideOnNUmber(n);
                             break;
                         }
                     }
+                    break;
+
+                }
+
+                case (7): {
+                    int name = matrixA.chooseMatrix();
+                    switch (name) {
+                        case (1): {
+                            matrixA.findInvertedMatrix();
+                            break;
+                        }
+                        case (2): {
+                            matrixB.findInvertedMatrix();
+                            break;
+                        }
+                    }
+                    break;
 
                 }
             }
