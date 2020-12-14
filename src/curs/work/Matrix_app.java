@@ -17,7 +17,7 @@ public class Matrix_app {
 
         while (command != 0) {
             System.out.print("1 - ввести матрицю, 2 - множення матриці на число, 3 - піднесення матриці до степеня," +
-                    " 4 - складання двох матриць, 5 - множення матриць, 6 - ділення матриці на число, 7 - пошук оберненої матриці, 8 - транспонування матриці, 0 - вихід:   ");
+                    " 4 - складання двох матриць, 5 - множення матриць, 6 - ділення матриці на число, 7 - пошук оберненої матриці, 8 - транспонування матриці, 9 - віднімання матриці, 0 - вихід:   ");
             try {
                 command = in.nextInt();
                 switch (command) {
@@ -137,6 +137,22 @@ public class Matrix_app {
                         }
                         break;
 
+                    }
+                    case (9): {
+                        int choice;
+                        System.out.println("1 - А-В, 2 - В-А");
+                        choice = in.nextInt();
+                        switch (choice) {
+                            case (1): {
+                                matrixA.subtractionMatrices(matrixB);
+                                break;
+                            }
+                            case (2): {
+                                matrixB.subtractionMatrices(matrixA);
+                                break;
+                            }
+                        }
+                        break;
                     }
 
                     default: {

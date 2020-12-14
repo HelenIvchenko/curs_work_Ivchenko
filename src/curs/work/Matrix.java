@@ -150,15 +150,29 @@ public class Matrix {
     }
 
 
-    Matrix addMatrices(Matrix firstMatrix, Matrix secondMatrix) {
+    Matrix subtractionMatrices(Matrix firstMatrix, Matrix secondMatrix) {
         Matrix result = new Matrix();
         result.matrix = new double[firstMatrix.rows][secondMatrix.columns];
         for (int i = 0; i < firstMatrix.rows; i++) {
             for (int j = 0; j < secondMatrix.columns; j++) {
-                result.matrix[i][j] += firstMatrix.matrix[i][j] + secondMatrix.matrix[i][j];
+                result.matrix[i][j] = firstMatrix.matrix[i][j] - secondMatrix.matrix[i][j];
             }
         }
         return result;
+    }
+
+    void subtractionMatrices(Matrix secondMatrix) {
+        if (this.columns == secondMatrix.columns && this.rows == secondMatrix.rows) {
+            Matrix result = subtractionMatrices(this, secondMatrix);
+            System.out.printf("Результат віднімання матриці %s від матриці %s\n",  secondMatrix.name,this.name);
+            for (int i = 0; i < result.matrix.length; i++) {
+                for (int j = 0; j < result.matrix[i].length; j++) {
+                    System.out.print(result.matrix[i][j] + " ");
+                }
+                System.out.println();
+            }
+        } else
+            System.out.printf("Кількість рядків і стовбців матриці %s має дорівнювтаи кількості рядків і стовбців матриці %s відповідно\n", this.name, secondMatrix.name);
     }
 
     void addMatrices(Matrix secondMatrix) {
@@ -173,6 +187,17 @@ public class Matrix {
             }
         } else
             System.out.printf("Кількість рядків і стовбців матриці %s має дорівнювтаи кількості рядків і стовбців матриці %s відповідно\n", this.name, secondMatrix.name);
+    }
+
+    Matrix addMatrices(Matrix firstMatrix, Matrix secondMatrix) {
+        Matrix result = new Matrix();
+        result.matrix = new double[firstMatrix.rows][secondMatrix.columns];
+        for (int i = 0; i < firstMatrix.rows; i++) {
+            for (int j = 0; j < secondMatrix.columns; j++) {
+                result.matrix[i][j] += firstMatrix.matrix[i][j] + secondMatrix.matrix[i][j];
+            }
+        }
+        return result;
     }
 
     void findInvertedMatrix() {
