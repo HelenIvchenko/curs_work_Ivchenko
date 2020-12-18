@@ -32,17 +32,17 @@ public class Matrix_app {
                         }
                     }
                     case (2): {
-                        int name = matrixA.chooseMatrix();
+                        int name = chooseMatrix();
                         double n;
                         System.out.println("Введіть множник:");
                         n = in.nextDouble();
                         switch (name) {
                             case (1): {
-                                matrixA.multiplyOnNUmber(n);
+                                matrixA.multiplyOnNumber(n);
                                 break;
                             }
                             case (2): {
-                                matrixB.multiplyOnNUmber(n);
+                                matrixB.multiplyOnNumber(n);
                                 break;
                             }
                         }
@@ -50,7 +50,7 @@ public class Matrix_app {
                     }
 
                     case (3): {
-                        int name = matrixA.chooseMatrix();
+                        int name = chooseMatrix();
                         int k;
                         System.out.println("Введіть показник степеня (ціле додатнє число)");
                         k = in.nextInt();
@@ -77,11 +77,11 @@ public class Matrix_app {
                         choice = in.nextInt();
                         switch (choice) {
                             case (1): {
-                                matrixA.multiplyMatrix(matrixB);
+                                matrixA.multiplyMatrices(matrixB);
                                 break;
                             }
                             case (2): {
-                                matrixB.multiplyMatrix(matrixA);
+                                matrixB.multiplyMatrices(matrixA);
                                 break;
                             }
                         }
@@ -89,7 +89,7 @@ public class Matrix_app {
                     }
 
                     case (6): {
-                        int name = matrixA.chooseMatrix();
+                        int name = chooseMatrix();
                         double n;
                         System.out.println("Введіть дільник:");
                         n = in.nextDouble();
@@ -108,7 +108,7 @@ public class Matrix_app {
                     }
 
                     case (7): {
-                        int name = matrixA.chooseMatrix();
+                        int name = chooseMatrix();
                         switch (name) {
                             case (1): {
                                 matrixA.findInvertedMatrix();
@@ -124,7 +124,7 @@ public class Matrix_app {
                     }
 
                     case (8): {
-                        int name = matrixA.chooseMatrix();
+                        int name = chooseMatrix();
                         switch (name) {
                             case (1): {
                                 matrixA.transpose();
@@ -166,6 +166,13 @@ public class Matrix_app {
                 break;
             }
         }
+    }
+
+    public static int chooseMatrix() {
+        Scanner in = new Scanner(System.in);
+        System.out.println("1 - обрати матрицю A, 2 - обрати матрицю В");
+        int name = in.nextInt();
+        return name;
     }
 
 }

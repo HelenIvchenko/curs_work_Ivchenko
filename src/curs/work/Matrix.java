@@ -61,7 +61,7 @@ public class Matrix {
         counter++;
     }
 
-    void multiplyOnNUmber(double number) {
+    void multiplyOnNumber(double number) {
         System.out.printf("Результат множення матриці %s на число %.2f\n", name, number);
         for (int i = 0; i < this.matrix.length; i++) {
             for (int j = 0; j < this.matrix[i].length; j++) {
@@ -101,28 +101,31 @@ public class Matrix {
 
 
     void exponentMatrix(int k) {
+        Matrix result = new Matrix();
         if (this.columns == this.rows) {
-            Matrix result = multiplyMatrices(this, this);
-            System.out.printf("Результат піднесення матриці %s до степеня %d\n", this.name, k);
             for (int s = 1; s < +k; s++) {
-                for (int i = 0; i < result.matrix.length; i++) {
-                    for (int j = 0; j < result.matrix[i].length; j++) {
-                        System.out.print(result.matrix[i][j] + " ");
-                    }
-                    System.out.println();
-                }
+                result = multiplyMatrices(this, this);
             }
+            System.out.printf("Результат піднесення матриці %s до степеня %d\n", this.name, k);
+
+            for (int i = 0; i < result.matrix.length; i++) {
+                for (int j = 0; j < result.matrix[i].length; j++) {
+                    System.out.print(result.matrix[i][j] + " ");
+                }
+                System.out.println();
+            }
+
         } else
             System.out.printf("Для піднесення до степеня матриця %s має бути квадратною\n", this.name);
     }
 
-    public int chooseMatrix() {
-        System.out.println("1 - обрати матрицю A, 2 - обрати матрицю В");
-        int name = in.nextInt();
-        return name;
-    }
+//    public int chooseMatrix() {
+//        System.out.println("1 - обрати матрицю A, 2 - обрати матрицю В");
+//        int name = in.nextInt();
+//        return name;
+//    }
 
-    void multiplyMatrix(Matrix secondMatrix) {
+    void multiplyMatrices(Matrix secondMatrix) {
         if (this.columns == secondMatrix.rows) {
             Matrix result = multiplyMatrices(this, secondMatrix);
             System.out.printf("Результат множення матриці %s на матрицю %s\n", this.name, secondMatrix.name);
@@ -164,7 +167,7 @@ public class Matrix {
     void subtractionMatrices(Matrix secondMatrix) {
         if (this.columns == secondMatrix.columns && this.rows == secondMatrix.rows) {
             Matrix result = subtractionMatrices(this, secondMatrix);
-            System.out.printf("Результат віднімання матриці %s від матриці %s\n",  secondMatrix.name,this.name);
+            System.out.printf("Результат віднімання матриці %s від матриці %s\n", secondMatrix.name, this.name);
             for (int i = 0; i < result.matrix.length; i++) {
                 for (int j = 0; j < result.matrix[i].length; j++) {
                     System.out.print(result.matrix[i][j] + " ");
@@ -202,7 +205,7 @@ public class Matrix {
 
     void findInvertedMatrix() {
         if (this.columns == this.rows) {
-            Matrix result = multiplyMatrices(this, this);
+            Matrix result = invert(this);
             System.out.printf("Обернена матриця до матриці %s \n", this.name);
 
             for (int i = 0; i < result.matrix.length; i++) {
