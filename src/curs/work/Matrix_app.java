@@ -154,6 +154,9 @@ public class Matrix_app {
                         }
                         break;
                     }
+                    case (0): {
+                        break;
+                    }
 
                     default: {
                         System.out.println("Оберіть пункт меню");

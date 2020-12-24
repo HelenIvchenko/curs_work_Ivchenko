@@ -119,12 +119,6 @@ public class Matrix {
             System.out.printf("Для піднесення до степеня матриця %s має бути квадратною\n", this.name);
     }
 
-//    public int chooseMatrix() {
-//        System.out.println("1 - обрати матрицю A, 2 - обрати матрицю В");
-//        int name = in.nextInt();
-//        return name;
-//    }
-
     void multiplyMatrices(Matrix secondMatrix) {
         if (this.columns == secondMatrix.rows) {
             Matrix result = multiplyMatrices(this, secondMatrix);
