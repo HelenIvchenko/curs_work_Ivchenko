@@ -102,21 +102,32 @@ public class Matrix {
 
     void exponentMatrix(int k) {
         Matrix result = new Matrix();
-        if (this.columns == this.rows) {
-            for (int s = 1; s < +k; s++) {
-                result = multiplyMatrices(this, this);
+        result.rows = this.rows;
+        result.columns = this.columns;
+        result.matrix = new double[this.rows][this.columns];
+        for (int i = 0; i < this.matrix.length; i++) {
+            for (int j = 0; j < this.matrix[i].length; j++) {
+                result.matrix[i][j] = this.matrix[i][j];
             }
-            System.out.printf("Результат піднесення матриці %s до степеня %d\n", this.name, k);
+        }
+        if (this.columns == this.rows && k > 1) {
+            for (int s = 1; s < k; s++) {
+                result = multiplyMatrices(this, result);
+            }
+            System.out.printf("Результат піднесення матриці %s до степеню %d\n", this.name, k);
 
             for (int i = 0; i < result.matrix.length; i++) {
                 for (int j = 0; j < result.matrix[i].length; j++) {
-                    System.out.print(result.matrix[i][j] + " ");
+                    System.out.printf("%.2f ",result.matrix[i][j]);
                 }
                 System.out.println();
             }
 
-        } else
-            System.out.printf("Для піднесення до степеня матриця %s має бути квадратною\n", this.name);
+        } else if (this.columns != this.rows) {
+            System.out.printf("Для піднесення до степеню матриця %s має бути квадратною\n", this.name);
+        } else if (k<1) {
+            System.out.printf("Показник степеню має бути більше 1\n");
+        }
     }
 
     void multiplyMatrices(Matrix secondMatrix) {
@@ -135,6 +146,8 @@ public class Matrix {
 
     Matrix multiplyMatrices(Matrix firstMatrix, Matrix secondMatrix) {
         Matrix result = new Matrix();
+        result.rows=firstMatrix.rows;
+        result.columns=secondMatrix.columns;
         result.matrix = new double[firstMatrix.rows][secondMatrix.columns];
         for (int i = 0; i < firstMatrix.rows; i++) {
             for (int j = 0; j < secondMatrix.columns; j++) {
