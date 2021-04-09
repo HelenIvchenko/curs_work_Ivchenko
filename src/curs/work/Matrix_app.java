@@ -7,16 +7,22 @@ import java.util.Scanner;
 
 public class Matrix_app {
 
+
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+
+
     public static void main(String args[]) {
 
         Matrix matrixA = new Matrix();
         Matrix matrixB = new Matrix();
         int command = -1;
         Scanner in = new Scanner(System.in);
-        System.out.println("Оберіть пункт меню");
+        System.out.println(ANSI_PURPLE + "Оберіть пункт меню:\n");
 
         while (command != 0) {
-            System.out.print("1 - ввести матрицю\n2 - множення матриці на число\n3 - піднесення матриці до степеню\n" +
+            System.out.print(ANSI_PURPLE + "1 - ввести матрицю\n2 - множення матриці на число\n3 - піднесення матриці до степеню\n" +
                     "4 - складання двох матриць\n5 - множення матриць\n6 - ділення матриці на число\n7 - пошук оберненої матриці\n8 - транспонування матриці\n9 - віднімання матриці\n0 - вихід\n");
             try {
                 command = in.nextInt();
@@ -34,7 +40,7 @@ public class Matrix_app {
                     case (2): {
                         int name = chooseMatrix();
                         double n;
-                        System.out.println("Введіть множник:");
+                        System.out.println(ANSI_YELLOW + "Введіть множник:");
                         n = in.nextDouble();
                         switch (name) {
                             case (1): {
@@ -52,7 +58,7 @@ public class Matrix_app {
                     case (3): {
                         int name = chooseMatrix();
                         int k;
-                        System.out.println("Введіть показник степеня (ціле додатнє число)");
+                        System.out.println(ANSI_YELLOW + "Введіть показник степеня (ціле додатнє число)");
                         k = in.nextInt();
                         switch (name) {
                             case (1): {
@@ -73,7 +79,7 @@ public class Matrix_app {
 
                     case (5): {
                         int choice;
-                        System.out.println("1 - А*В, 2 - В*А");
+                        System.out.println(ANSI_YELLOW + "1 - А*В, 2 - В*А");
                         choice = in.nextInt();
                         switch (choice) {
                             case (1): {
@@ -91,7 +97,7 @@ public class Matrix_app {
                     case (6): {
                         int name = chooseMatrix();
                         double n;
-                        System.out.println("Введіть дільник:");
+                        System.out.println(ANSI_YELLOW + "Введіть дільник:");
                         n = in.nextDouble();
                         switch (name) {
                             case (1): {
@@ -140,7 +146,7 @@ public class Matrix_app {
                     }
                     case (9): {
                         int choice;
-                        System.out.println("1 - А-В, 2 - В-А");
+                        System.out.println(ANSI_YELLOW + "1 - А-В, 2 - В-А");
                         choice = in.nextInt();
                         switch (choice) {
                             case (1): {
@@ -159,13 +165,13 @@ public class Matrix_app {
                     }
 
                     default: {
-                        System.out.println("Оберіть пункт меню");
+                        System.out.println(ANSI_PURPLE + "Оберіть пункт меню");
                         break;
 
                     }
                 }
             } catch (InputMismatchException e) {
-                System.out.print("Сталася помилка при спробі вводу");
+                System.out.print(ANSI_RED + "Сталася помилка при спробі вводу");
                 break;
             }
         }
@@ -173,7 +179,7 @@ public class Matrix_app {
 
     public static int chooseMatrix() {
         Scanner in = new Scanner(System.in);
-        System.out.println("1 - обрати матрицю A, 2 - обрати матрицю В");
+        System.out.println(ANSI_YELLOW + "1 - обрати матрицю A, 2 - обрати матрицю В");
         int name = in.nextInt();
         return name;
     }

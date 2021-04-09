@@ -4,6 +4,11 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Matrix {
+
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+
     Scanner in = new Scanner(System.in);
     int rows = -1;
     int columns = -1;
@@ -18,23 +23,23 @@ public class Matrix {
     Matrix(String name) {
         this.name = name;
         while (rows <= 0) {
-            System.out.print("Введіть кількість рядків матриці " + name + " (ціле число більше 0): ");
+            System.out.print(ANSI_YELLOW + "Введіть кількість рядків матриці " + name + " (ціле число більше 0): ");
             int oldRows = rows;
             try {
                 rows = in.nextInt();
             } catch (InputMismatchException e) {
-                System.out.print("Сталася помилка при спробі вводу");
+                System.out.print(ANSI_RED + "Сталася помилка при спробі вводу");
             }
             if (rows == oldRows) break;
         }
 
         while (rows > 0 && columns <= 0) {
-            System.out.print("Введіть кількість колонок матриці " + name + " (ціле число більше 0): ");
+            System.out.print(ANSI_YELLOW + "Введіть кількість колонок матриці " + name + " (ціле число більше 0): ");
             int oldColumns = columns;
             try {
                 columns = in.nextInt();
             } catch (InputMismatchException e) {
-                System.out.print("Сталася помилка при спробі вводу");
+                System.out.print(ANSI_RED + "Сталася помилка при спробі вводу");
             }
             if (columns == oldColumns) break;
         }
@@ -42,19 +47,19 @@ public class Matrix {
         matrix = new double[rows][columns];
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
-                System.out.print("Введіть елемент a[" + (i + 1) + "]" + "[" + (j + 1) + "]" + " матриці  " + name + ": ");
+                System.out.print(ANSI_YELLOW + "Введіть елемент a[" + (i + 1) + "]" + "[" + (j + 1) + "]" + " матриці  " + name + ": ");
                 try {
                     matrix[i][j] = in.nextDouble();
                 } catch (InputMismatchException e) {
-                    System.out.print("Сталася помилка при спробі вводу");
+                    System.out.print(ANSI_RED + "Сталася помилка при спробі вводу");
                 }
 
             }
         }
-        System.out.print("Ваша матриця " + name + ":\n");
+        System.out.print(ANSI_CYAN + "Ваша матриця " + name + ":\n");
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
-                System.out.print(matrix[i][j] + " ");
+                System.out.print(ANSI_CYAN + matrix[i][j] + " ");
             }
             System.out.println();
         }
@@ -62,29 +67,29 @@ public class Matrix {
     }
 
     void multiplyOnNumber(double number) {
-        System.out.printf("Результат множення матриці %s на число %.2f\n", name, number);
+        System.out.printf(ANSI_CYAN + "Результат множення матриці %s на число %.2f\n", name, number);
         for (int i = 0; i < this.matrix.length; i++) {
             for (int j = 0; j < this.matrix[i].length; j++) {
                 matrix[i][j] = matrix[i][j] * number;
-                System.out.print(this.matrix[i][j] + " ");
+                System.out.print(ANSI_CYAN + this.matrix[i][j] + " ");
             }
             System.out.println();
         }
     }
 
     void divideOnNUmber(double number) {
-        System.out.printf("Результат ділення матриці %s на число %.2f\n", name, number);
+        System.out.printf(ANSI_CYAN + "Результат ділення матриці %s на число %.2f\n", name, number);
         for (int i = 0; i < this.matrix.length; i++) {
             for (int j = 0; j < this.matrix[i].length; j++) {
                 matrix[i][j] = matrix[i][j] / number;
-                System.out.print(this.matrix[i][j] + " ");
+                System.out.print(ANSI_CYAN + this.matrix[i][j] + " ");
             }
             System.out.println();
         }
     }
 
     void transpose() {
-        System.out.printf("Результат транспонування матриці %s\n", name);
+        System.out.printf(ANSI_CYAN + "Результат транспонування матриці %s\n", name);
         double[][] transposed = new double[this.columns][this.rows];
         for (int i = 0; i < this.columns; i++) {
             for (int j = 0; j < this.rows; j++) {
@@ -93,7 +98,7 @@ public class Matrix {
         }
         for (int i = 0; i < this.columns; i++) {
             for (int j = 0; j < this.rows; j++) {
-                System.out.print(transposed[i][j] + " ");
+                System.out.print(ANSI_CYAN + transposed[i][j] + " ");
             }
             System.out.println();
         }
@@ -114,40 +119,40 @@ public class Matrix {
             for (int s = 1; s < k; s++) {
                 result = multiplyMatrices(this, result);
             }
-            System.out.printf("Результат піднесення матриці %s до степеню %d\n", this.name, k);
+            System.out.printf(ANSI_CYAN + "Результат піднесення матриці %s до степеню %d\n", this.name, k);
 
             for (int i = 0; i < result.matrix.length; i++) {
                 for (int j = 0; j < result.matrix[i].length; j++) {
-                    System.out.printf("%.2f ",result.matrix[i][j]);
+                    System.out.printf(ANSI_CYAN + "%.2f ", result.matrix[i][j]);
                 }
                 System.out.println();
             }
 
         } else if (this.columns != this.rows) {
-            System.out.printf("Для піднесення до степеню матриця %s має бути квадратною\n", this.name);
-        } else if (k<1) {
-            System.out.printf("Показник степеню має бути більше 1\n");
+            System.out.printf(ANSI_RED + "Для піднесення до степеню матриця %s має бути квадратною\n", this.name);
+        } else if (k < 1) {
+            System.out.printf(ANSI_RED + "Показник степеню має бути більше 1\n");
         }
     }
 
     void multiplyMatrices(Matrix secondMatrix) {
         if (this.columns == secondMatrix.rows) {
             Matrix result = multiplyMatrices(this, secondMatrix);
-            System.out.printf("Результат множення матриці %s на матрицю %s\n", this.name, secondMatrix.name);
+            System.out.printf(ANSI_CYAN + "Результат множення матриці %s на матрицю %s\n", this.name, secondMatrix.name);
             for (int i = 0; i < result.matrix.length; i++) {
                 for (int j = 0; j < result.matrix[i].length; j++) {
-                    System.out.print(result.matrix[i][j] + " ");
+                    System.out.print(ANSI_CYAN + result.matrix[i][j] + " ");
                 }
                 System.out.println();
             }
         } else
-            System.out.printf("Кількість стовбців матриці %s має дорівнювтаи кількості рядків матриці %s\n", this.name, secondMatrix.name);
+            System.out.printf(ANSI_RED + "Кількість стовбців матриці %s має дорівнювтаи кількості рядків матриці %s\n", this.name, secondMatrix.name);
     }
 
     Matrix multiplyMatrices(Matrix firstMatrix, Matrix secondMatrix) {
         Matrix result = new Matrix();
-        result.rows=firstMatrix.rows;
-        result.columns=secondMatrix.columns;
+        result.rows = firstMatrix.rows;
+        result.columns = secondMatrix.columns;
         result.matrix = new double[firstMatrix.rows][secondMatrix.columns];
         for (int i = 0; i < firstMatrix.rows; i++) {
             for (int j = 0; j < secondMatrix.columns; j++) {
@@ -174,29 +179,29 @@ public class Matrix {
     void subtractionMatrices(Matrix secondMatrix) {
         if (this.columns == secondMatrix.columns && this.rows == secondMatrix.rows) {
             Matrix result = subtractionMatrices(this, secondMatrix);
-            System.out.printf("Результат віднімання матриці %s від матриці %s\n", secondMatrix.name, this.name);
+            System.out.printf(ANSI_CYAN + "Результат віднімання матриці %s від матриці %s\n", secondMatrix.name, this.name);
             for (int i = 0; i < result.matrix.length; i++) {
                 for (int j = 0; j < result.matrix[i].length; j++) {
-                    System.out.print(result.matrix[i][j] + " ");
+                    System.out.print(ANSI_CYAN + result.matrix[i][j] + " ");
                 }
                 System.out.println();
             }
         } else
-            System.out.printf("Кількість рядків і стовбців матриці %s має дорівнювтаи кількості рядків і стовбців матриці %s відповідно\n", this.name, secondMatrix.name);
+            System.out.printf(ANSI_RED + "Кількість рядків і стовбців матриці %s має дорівнювтаи кількості рядків і стовбців матриці %s відповідно\n", this.name, secondMatrix.name);
     }
 
     void addMatrices(Matrix secondMatrix) {
         if (this.columns == secondMatrix.columns && this.rows == secondMatrix.rows) {
             Matrix result = addMatrices(this, secondMatrix);
-            System.out.printf("Результат додавання матриці %s та матриці %s\n", this.name, secondMatrix.name);
+            System.out.printf(ANSI_CYAN + "Результат додавання матриці %s та матриці %s\n", this.name, secondMatrix.name);
             for (int i = 0; i < result.matrix.length; i++) {
                 for (int j = 0; j < result.matrix[i].length; j++) {
-                    System.out.print(result.matrix[i][j] + " ");
+                    System.out.print(ANSI_CYAN + result.matrix[i][j] + " ");
                 }
                 System.out.println();
             }
         } else
-            System.out.printf("Кількість рядків і стовбців матриці %s має дорівнювтаи кількості рядків і стовбців матриці %s відповідно\n", this.name, secondMatrix.name);
+            System.out.printf(ANSI_RED + "Кількість рядків і стовбців матриці %s має дорівнювтаи кількості рядків і стовбців матриці %s відповідно\n", this.name, secondMatrix.name);
     }
 
     Matrix addMatrices(Matrix firstMatrix, Matrix secondMatrix) {
@@ -213,17 +218,17 @@ public class Matrix {
     void findInvertedMatrix() {
         if (this.columns == this.rows) {
             Matrix result = invert(this);
-            System.out.printf("Обернена матриця до матриці %s \n", this.name);
+            System.out.printf(ANSI_CYAN + "Обернена матриця до матриці %s \n", this.name);
 
             for (int i = 0; i < result.matrix.length; i++) {
                 for (int j = 0; j < result.matrix[i].length; j++) {
-                    System.out.print(result.matrix[i][j] + " ");
+                    System.out.print(ANSI_CYAN + result.matrix[i][j] + " ");
                 }
                 System.out.println();
             }
 
         } else
-            System.out.printf("Для пошуку оберненої матриці матриця %s має бути квадратною\n", this.name);
+            System.out.printf(ANSI_RED + "Для пошуку оберненої матриці матриця %s має бути квадратною\n", this.name);
     }
 
 
